@@ -1,3 +1,4 @@
+# Script to "auto" update the Signal Sciences IIS Module
 Invoke-WebRequest -uri "https://dl.signalsciences.net/sigsci-module-iis/sigsci-module-iis_latest.msi" -OutFile C:\Apps\sigsci\module\sigsci-module-iis_latest.msi 
 sleep 60
 stop-service w3svc
