@@ -1,0 +1,21 @@
+# Install the Signal Science agent and monitor on an Azure Web App
+#https://docs.signalsciences.net/install-guides/paas/azure-app-service/
+
+#Vars
+$TargetRG = "yourRG"
+$TargetWebApp = "YourWebApp"
+$ACCESSKEYID = "yourkey"
+$SECRETACCESSKEY = "yourkey"
+
+# Install the requirement App Settings
+az webapp config appsettings set -g $TargetRG --name $TargetWebApp --settings  SIGSCI_ACCESSKEYID=$ACCESSKEYID
+az webapp config appsettings set -g $TargetRG --name $TargetWebApp --settings  SIGSCI_SECRETACCESSKEY=$SECRETACCESSKEY
+
+# Stop the web app
+az webapp stop -g $TargetRG --name $TargetWebApp
+
+# Install the extension
+# isn't there a command for this?
+
+# Start the web app
+az webapp start -g $TargetRG --name $TargetWebApp
