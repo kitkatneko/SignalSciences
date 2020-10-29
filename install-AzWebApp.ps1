@@ -1,4 +1,4 @@
-  
+
 # Install the Signal Science agent and monitor on an Azure Web App
 # https://docs.signalsciences.net/install-guides/paas/azure-app-service/
 # use POSH, duh!
@@ -12,12 +12,11 @@ $SECRETACCESSKEY = "yourKey"
 $webapps=(az webapp list -o tsv -g $TargetRG --query "[].name")
 foreach ($webapp in $webapps) {
   # Set the settings
-  Write-Output "Adding App Settings Keys... "$webapp
+  Write-Output "Adding App Settings Keys to: $webapp"
   $accesskey=(az webapp config appsettings set -g $TargetRG --name $webapp --settings  SIGSCI_ACCESSKEYID=$ACCESSKEYID)
   $secretkey=(az webapp config appsettings set -g $TargetRG --name $webapp --settings  SIGSCI_SECRETACCESSKEY=$SECRETACCESSKEY)
   
-  # Stop the web app
-  Write-Output "Installing Site Extension... "
+  Write-Output "Stopping web app: $webapp"
   az webapp stop -g $TargetRG --name $webapp
 
   # install the extension if not already there
@@ -29,8 +28,8 @@ foreach ($webapp in $webapps) {
     else {
       Write-Output "Sig Sci WAF extension already installed"
     }
-  # Start the web app
-  Write-Output "Installing Site Extension... "
+
+  Write-Output "Starting web app: $webapp"
   az webapp start -g $TargetRG --name $webapp
 }
 
