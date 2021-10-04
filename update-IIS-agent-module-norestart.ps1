@@ -1,3 +1,8 @@
+# 3 liners
+#[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+#$Script = Invoke-RestMethod https://raw.githubusercontent.com/kitkatneko/SignalSciences/master/update-IIS-agent-module-norestart.ps1
+#Invoke-Expression $Script
+
 $AgentPath = "c:\apps\sigsci\agent"
 $ModulePath = "c:\apps\sigsci\module"
 # Prereqs
