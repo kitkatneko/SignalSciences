@@ -1,7 +1,9 @@
+$AgentPath = "c:\apps\sigsci\agent"
+$ModulePath = "c:\apps\sigsci\module"
 # Prereqs
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-mkdir c:\apps\sigsci\agent
-mkdir c:\apps\sigsci\module
+if (test-path $AgentPath) {} else {New-Item -Path $AgentPath -ItemType Directory}
+if (test-path $ModulePath) {} else {New-Item -Path $ModulePath -ItemType Directory}
 
 # Script to "auto" update the Signal Sciences Agent
 Invoke-WebRequest -uri "https://dl.signalsciences.net/sigsci-agent/sigsci-agent_latest.msi" -OutFile C:\Apps\sigsci\agent\sigsci-agent_latest.msi
